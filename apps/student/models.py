@@ -22,7 +22,8 @@ class Student(models.Model):
     major = models.CharField(max_length=15,verbose_name='专业')
     stu_class = models.CharField(max_length=15,verbose_name='班级')
     c_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
-    has_confirmed = models.BooleanField(default=False)
+    has_confirmed = models.BooleanField(default=False,verbose_name='激活状态')
+
 
 
     class Meta:
@@ -30,6 +31,9 @@ class Student(models.Model):
         ordering = ['-c_time']
         verbose_name = '学生'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.username
 
 class ConfirmString(models.Model):
     code = models.CharField(max_length=256)

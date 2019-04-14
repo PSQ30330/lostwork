@@ -13,12 +13,15 @@ class Teacher(models.Model):
     sex = models.CharField(max_length=32, choices=gender, default="男", verbose_name='性别')
     emali = models.EmailField(unique=True,  verbose_name='电子邮件')
     c_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
-    has_confirmed = models.BooleanField(default=False)
+    has_confirmed = models.BooleanField(default=False,verbose_name="激活状态")
     class Meta:
         db_table = 'teacher'
         ordering = ['-c_time']
         verbose_name = '老师'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.username
 
 class ConfirmString(models.Model):
     code = models.CharField(max_length=256)

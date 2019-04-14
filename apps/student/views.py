@@ -51,7 +51,7 @@ def login(request):
                 if user.password == hash_code(password):
                     request.session['is_login'] = True
 
-                    request.session['user_name'] = user.username
+                    request.session['stu_name'] = user.stu_name
                     return redirect('/student/index/')
                 else:
                     message = "密码不正确！"
@@ -153,10 +153,8 @@ def logout(request):
         # 如果本来就未登录，也就没有登出一说
         return redirect("/student/index/")
     request.session.flush()
-    # 或者使用下面的方法
-    # del request.session['is_login']
-    # del request.session['user_id']
-    # del request.session['user_name']
+
+
     return redirect("/student/index/")
 def user_confirm(request):
     code = request.GET.get('code', None)

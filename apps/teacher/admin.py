@@ -1,6 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from teacher import models
+from teacher.models import Teacher
 
-admin.site.register(models.Teacher)
+
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ('username','tea_name','sex','emali','c_time','has_confirmed')
+
+
+admin.site.register(Teacher,TeacherAdmin)
