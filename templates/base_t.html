@@ -37,11 +37,16 @@
         <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/teacher/index/">主页</a></li>
+              {% if request.session.is_login %}
+              <li class="active"><a href="/project/add_projet/">课题录入</a></li>
+              {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
               <li><a href="#">当前在线：{{ request.session.tea_name }}</a></li>
+
               <li><a href="/teacher/logout/">注销</a></li>
+
               {% else %}
             <li><a href="/teacher/login/">登录</a></li>
             <li><a href="/teacher/register/">注册</a></li>

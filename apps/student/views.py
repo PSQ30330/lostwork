@@ -5,35 +5,16 @@ from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, redirect
 
 from lostwork import settings
-from student import models
 from student import forms
+from student import models
+
 
 def index(request):
 
     return render(request, 'student/index.html')
 
 
-# def login(request):
-#     if request.method == "POST":
-#         username = request.POST.get('username', None)
-#         password = request.POST.get('password', None)
-#         message = "所有字段都必须填写！"
-#         if username and password:  # 确保用户名和密码都不为空
-#             username = username.strip()
-#             # 用户名字符合法性验证
-#             # 密码长度验证
-#             # 更多的其它验证.....
-#             try:
-#                 user = models.Student.objects.get(username=username)
-#                 if user.password == password:
-#                     return redirect('/index/')
-#                 else:
-#                     message = "密码不正确！"
-#             except:
-#                 message = "用户名不存在！"
-#         return render(request, 'student/login.html', {"message": message})
-#
-#     return render(request, 'student/login.html')
+
 def login(request):
     if request.session.get('is_login', None):
         return redirect("/student/index/")
@@ -126,7 +107,7 @@ def register(request):
                     message = '该邮箱地址已被注册，请使用别的邮箱！'
                     return render(request, 'student/register.html', locals())
 
-                # 当一切都OK的情况下，创建新用户
+
 
                 new_user = models.Student()
                 new_user.username = username
@@ -138,6 +119,7 @@ def register(request):
                 new_user.stu_class = stu_class
 
                 new_user.save()
+
 
                 code = make_confirm_string(new_user)
                 send_email(emali, code)
@@ -168,9 +150,11 @@ def user_confirm(request):
     c_time = confirm.c_time
     now = datetime.datetime.now()
 
-
     confirm.student.has_confirmed = True
+
+
     confirm.student.save()
     confirm.delete()
     message = '感谢确认，请使用账户登录！'
     return render(request, 'student/confirm.html', locals())
+

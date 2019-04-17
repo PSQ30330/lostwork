@@ -23,3 +23,4 @@ class RegisterForm(forms.Form):
     major = forms.CharField(label="专业",max_length=15, widget=forms.TextInput(attrs={'class': 'form-control'}))
     stu_class = forms.CharField(label="班级",max_length=15,widget=forms.TextInput(attrs={'class': 'form-control'}))
     captcha = CaptchaField(label='验证码')
+

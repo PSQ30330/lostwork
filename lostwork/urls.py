@@ -20,8 +20,7 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^student/', include('student.urls', namespace='student')),
     url(r'^teacher/', include('teacher.urls', namespace='teacher')),
-
+    url(r'^project/', include('project.urls', namespace='project')),
     url(r'^captcha', include('captcha.urls')),
-
 
 ]
