@@ -5,5 +5,5 @@ from project.models import TeacherProject
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('pro_id','pro_title','pro_type','pro_content','pro_count','c_time','has_confirmed')
+    list_display = ('pro_id','pro_title','pro_type','pro_content','pro_count','c_time','bei_zhu','fa_za','fei_gong','has_confirmed')
 admin.site.register(TeacherProject,ProjectAdmin)

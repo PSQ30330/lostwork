@@ -18,6 +18,9 @@ class TeacherProject(models.Model):
     pro_content = models.TextField(max_length=1000,verbose_name='课题内容')
     pro_count = models.IntegerField(verbose_name="学生选题人数")
     c_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    bei_zhu = models.CharField(max_length=100,null=True,verbose_name='课题审核')
+    fa_za = models.CharField(max_length=20,null=True,verbose_name="课题难易程度")
+    fei_gong = models.CharField(max_length=300,null=True,verbose_name='学生分工')
     has_confirmed = models.BooleanField(default=False,verbose_name="管理员审核状态")
 
     def __str__(self):
@@ -29,22 +32,27 @@ class TeacherProject(models.Model):
         verbose_name = "实训题目"
         verbose_name_plural = "实训题目"
 
-# class StudentSelect(models.Model):
-#     stu_username = models.ForeignKey(Student)
-#     stu_proid = models.ForeignKey(TeacherProject)
-#     c_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
-#
-#     def __str__(self):
-#         return self.stu_username
-#
-#     class Meta:
-#         db_table = 'student_select'
-#         ordering = ['-c_time']
-#         verbose_name = "学生选题"
-#         verbose_name_plural = "学生选题"
-#
-#
-#
+class StudentSelect(models.Model):
+    stu_username = models.ForeignKey(Student)
+    stu_proid = models.ForeignKey(TeacherProject)
+    stu_name = models.CharField(max_length=32,verbose_name='姓名')
+    stu_major = models.CharField(max_length=15,verbose_name='专业')
+    stu_class = models.CharField(max_length=15,verbose_name='班级')
+    stu_protitle =models.CharField(max_length=40,verbose_name="实训题目")
+    stu_teacher = models.CharField(max_length=15,verbose_name="指导老师")
+    c_time = models.DateTimeField(auto_now_add=True, verbose_name="选题时间")
+
+    def __str__(self):
+        return self.stu_username
+
+    class Meta:
+        db_table = 'student_select'
+        ordering = ['-c_time']
+        verbose_name = "学生选题"
+        verbose_name_plural = "学生选题"
+
+
+
 # class StudentSelectNum(models.Model):
 #
 #     stu_num = models.IntegerField(null=True,verbose_name="学生人数")

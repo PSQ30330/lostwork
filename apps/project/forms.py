@@ -15,3 +15,5 @@ class ProForm(forms.Form):
     pro_content = forms.CharField(label='课题内容',max_length=1000,widget=forms.TextInput(attrs={'class': 'form-control'}))
     pro_count = forms.IntegerField(label="学生选题人数",widget=forms.TextInput(attrs={'class': 'form-control'}))
     captcha = CaptchaField(label='验证码')
+
+# class SelectForm(forms.Form):

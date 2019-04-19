@@ -9,4 +9,5 @@ urlpatterns =[
     url(r'^logout/', views.logout),
 
     url(r'^confirm/$', views.user_confirm),
+
 ]
