@@ -31,7 +31,7 @@ def login(request):
                     return render(request, 'student/login.html', locals())
                 if user.password == hash_code(password):
                     request.session['is_login'] = True
-
+                    request.session['username'] =user.username
                     request.session['stu_name'] = user.stu_name
                     return redirect('/student/index/')
                 else:

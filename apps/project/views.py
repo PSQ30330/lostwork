@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from project import forms, models
+from project.forms import XuanTiForm
 from project.models import StudentSelect, TeacherProject
 
 
@@ -75,7 +76,41 @@ def select_project(request):
     return HttpResponse(json.dumps(user_dic))
 
 
+def student_xunti(requset):
+    if requset.method == 'POST':
+        username = requset.session.get('username')
+        stu_xunti_form = forms.XuanTiForm(requset.POST)
+        if stu_xunti_form.is_valid():
+            pro_id = stu_xunti_form.cleaned_data['stu_proid']
+            id = models.StudentSelect.objects.filter().count()
+            if id > 0:
+                message = "已经选过实训题目，无需再添加"
+                return render(requset,'project/student_xuanti.html',locals())
+            else:
+                neirong = models.TeacherProject.objects.filter(pro_id= pro_id).all().first()
+                stu_username = username
+                pro_title =neirong.pro_title
+                pro_type =neirong.pro_type
+                pro_teacher =neirong.pro_teacher
+                pro_content = neirong.pro_content
+                pro_count =neirong.pro_count
+                fei_gong =neirong.fei_gong
+
+                new_user =models.StudentSelect()
+                new_user.stu_username=stu_username
+                new_user.stu_proid = pro_id
+                new_user.pro_title =pro_title
+                new_user.pro_type = pro_type
+                new_user.pro_teacher = pro_teacher
+                new_user.pro_content = pro_content
+                new_user.pro_count = pro_count
+                new_user.fei_gong = fei_gong
+
+                new_user.save()
 
 
+                return redirect('/student/index/')
 
 
+    stu_xunti_form = forms.XuanTiForm
+    return render(requset, 'project/student_xuanti.html', locals())

@@ -17,3 +17,7 @@ class ProForm(forms.Form):
     captcha = CaptchaField(label='验证码')
 
 # class SelectForm(forms.Form):
+
+class XuanTiForm(forms.Form):
+    stu_proid = forms.CharField(label="实训题目id号",max_length=15,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    captcha = CaptchaField(label='验证码')
