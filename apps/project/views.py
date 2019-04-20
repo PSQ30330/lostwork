@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from project import forms, models
-from project.forms import XuanTiForm
-from project.models import StudentSelect, TeacherProject
+from project.models import TeacherProject
+from student.models import Student
 
 
 def add_project(request):
@@ -74,18 +74,18 @@ def select_project(request):
 
 
 def student_xunti(requset):
+    username = requset.session.get('username')
+    stu_name = requset.session.get('stu_name')
     if requset.method == 'POST':
-        username = requset.session.get('username')
+
         stu_xunti_form = forms.XuanTiForm(requset.POST)
         if stu_xunti_form.is_valid():
             pro_id = stu_xunti_form.cleaned_data['stu_proid']
-            id = models.StudentSelect.objects.filter().count()
-            if id > 0:
-                message = "已经选过实训; 题目，无需再添加"
-                return render(requset, 'project/student_xuanti.html', locals())
-            else:
+            id = models.StudentSelect.objects.filter(stu_username=username)
+            if id.count() == 0:
                 neirong = models.TeacherProject.objects.filter(pro_id=pro_id).all().first()
                 stu_username = username
+                stu_name =stu_name
                 pro_title = neirong.pro_title
                 pro_type = neirong.pro_type
                 pro_teacher = neirong.pro_teacher
@@ -95,6 +95,7 @@ def student_xunti(requset):
 
                 new_user = models.StudentSelect()
                 new_user.stu_username = stu_username
+                new_user.stu_name =stu_name
                 new_user.stu_proid = pro_id
                 new_user.pro_title = pro_title
                 new_user.pro_type = pro_type
@@ -106,6 +107,9 @@ def student_xunti(requset):
                 new_user.save()
 
                 return redirect('/student/index/')
+        else:
+            message = "你已经选过实训题目，无需再添加"
+            return render(requset, 'project/student_xuanti.html', locals())
 
     stu_xunti_form = forms.XuanTiForm
     return render(requset, 'project/student_xuanti.html', locals())
@@ -119,11 +123,12 @@ def stu_chakan(requset):
     users_list = []
     username = requset.session.get('username')
 
-    req = models.StudentSelect.objects.filter(stu_username=username).all()
+    req = models.StudentSelect.objects.filter(stu_username=username).first()
 
     for item in req:
         user_info = {
             "stu_username": item.stu_username,
+            "stu_name":item.stu_name,
             "stu_proid": item.stu_proid,
             "pro_title": item.pro_title,
             "pro_type": item.pro_type,
@@ -138,3 +143,45 @@ def stu_chakan(requset):
 
     user_dic['data'] = users_list
     return HttpResponse(json.dumps(user_dic))
+
+def select_situation(request):
+
+
+    new_user =models.Student.objects.all()
+    newok_user = models.StudentSelect.objects.all()
+
+    for i in new_user:
+        ok_user = models.Select_Over.objects.filter(xuan_username=i.username)
+
+        not_ok = models.Select_notok()
+        new = models.Select_notok.objects.filter(notok_username=i.username)
+
+
+        if (new.count() == 0) and (ok_user.count() ==0) :
+
+            not_ok.notok_username = i.username
+
+            not_ok.notok_stu_name = i.stu_name
+
+
+            not_ok.save()
+
+
+    for user in newok_user:
+        user_ok = models.Select_Over()
+        oku = models.Select_Over.objects.filter(xuan_username=user.stu_username)
+
+
+        if oku.count() == 0:
+            user_ok.xuan_username = user.stu_username
+            user_ok.xuan_stu_name =user.stu_name
+            user_ok.xuan_pro_title = user.pro_title
+
+            user_ok.save()
+
+            models.Select_notok.objects.filter(notok_username=user.stu_username).delete()
+
+
+
+    return HttpResponse('ok')
+
