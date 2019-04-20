@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>学生选题</title>
+    <title>查看选题</title>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -18,34 +18,35 @@
  <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>编号</th>
+                <th>学号</th>
+                <th>实训题目id</th>
                 <th>标题</th>
                 <th>指导老师</th>
+                <th>类型</th>
                 <th>课题内容</th>
                 <th>学生选题人数</th>
-                <th>管理员审核意见</th>
-                <th>课题难易程度</th>
                 <th>学生分工</th>
 
             </tr>
         </thead>
 
 
-    </table>
+ </table>
+
  <script type="text/javascript">
      $(document).ready(function() {
         $('#example').DataTable({
             searching : false,
             destroy :true,
-        "ajax":"/project/select/",
+        "ajax":"/project/stu_chakan/",
         "columns":[
-                {"data":"pro_id"},
+                {"data":"stu_username"},
+                {"data":"stu_proid"},
                 {"data":"pro_title"},
                 {"data":"pro_teacher"},
+                {"data":"pro_type"},
                 {"data":"pro_content"},
                 {"data":"pro_count"},
-                {"data":"bei_zhu"},
-                {"data":"fa_za"},
                 {"data":"fei_gong"},
 
 
