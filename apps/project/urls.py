@@ -13,4 +13,5 @@ urlpatterns =[
     url(r'^data/$',views.teacher_chakan),
     url(r'^data_not/$',views.tea_chakan),
     url(r'^tea_chakan/$',views.chakan_select),
+    url(r'^test/$',views.select_situation,)
 ]
