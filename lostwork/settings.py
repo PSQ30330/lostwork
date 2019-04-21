@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'student',
     'teacher',
     'project',
+    'sgin',
     'captcha',
 
 

@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^student/', include('student.urls', namespace='student')),
     url(r'^teacher/', include('teacher.urls', namespace='teacher')),
     url(r'^project/', include('project.urls', namespace='project')),
+    url(r'^sgin/',include('sgin.urls',namespace='sgin')),
     url(r'^captcha', include('captcha.urls')),
 
 ]
