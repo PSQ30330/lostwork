@@ -5,12 +5,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from project import forms, models
-from project.models import TeacherProject, Select_Over, Select_notok
-from student.models import Student
+from project.models import Select_Over, Select_notok
 from project.models import TeacherProject
-from student.models import Student
 
-
+# 老师录入课题
 def add_project(request):
     if request.session.get('is_login', None):
         if request.method == "POST":
@@ -46,7 +44,7 @@ def add_project(request):
 
     return render(request, 'project/add_projet.html', locals())
 
-
+# 学生查看可选的课题
 def info(requset):
     return render(requset, 'project/student_select.html')
 
@@ -74,7 +72,7 @@ def select_project(request):
     user_dic['data'] = users_list
     return HttpResponse(json.dumps(user_dic))
 
-
+# 学生选题
 def student_xunti(requset):
     if requset.method == 'POST':
         username = requset.session.get('username')
@@ -112,7 +110,7 @@ def student_xunti(requset):
     stu_xunti_form = forms.XuanTiForm
     return render(requset, 'project/student_xuanti.html', locals())
 
-
+# 学生查看自己选择的课题
 def chakan(request):
     return render(request, 'project/chakan.html')
 
@@ -126,6 +124,7 @@ def stu_chakan(requset):
     for item in req:
         user_info = {
             "stu_username": item.stu_username,
+            'stu_name':item.stu_name,
             "stu_proid": item.stu_proid,
             "pro_title": item.pro_title,
             "pro_type": item.pro_type,
@@ -183,6 +182,7 @@ def select_situation(request):
 
     return HttpResponse('ok')
 
+# 已经选题学生
 def chakan_select(request):
 
     return render(request,'project/chakan_select.html')
@@ -203,6 +203,11 @@ def teacher_chakan(request):
     okuser_dic['data']=okusers_list
     return HttpResponse(json.dumps(okuser_dic))
 
+# 尚未选题学生
+def chakan_notok(request):
+
+    return render(request,'project/chakannotok_select.html')
+
 def tea_chakan(request):
     notusers_list = []
     not_req = Select_notok.objects.all()
@@ -213,50 +218,9 @@ def tea_chakan(request):
         }
         notusers_list.append(uokuser_info)
     uokuser_dic = {}
-    uokuser_dic['shuju']=notusers_list
+    uokuser_dic['data']=notusers_list
     return HttpResponse(json.dumps(uokuser_dic))
 
 
 
-
-def select_situation(request):
-
-
-    new_user =models.Student.objects.all()
-    newok_user = models.StudentSelect.objects.all()
-
-    for i in new_user:
-        ok_user = models.Select_Over.objects.filter(xuan_username=i.username)
-
-        not_ok = models.Select_notok()
-        new = models.Select_notok.objects.filter(notok_username=i.username)
-
-
-        if (new.count() == 0) and (ok_user.count() ==0) :
-
-            not_ok.notok_username = i.username
-
-            not_ok.notok_stu_name = i.stu_name
-
-
-            not_ok.save()
-
-
-    for user in newok_user:
-        user_ok = models.Select_Over()
-        oku = models.Select_Over.objects.filter(xuan_username=user.stu_username)
-
-
-        if oku.count() == 0:
-            user_ok.xuan_username = user.stu_username
-            user_ok.xuan_stu_name =user.stu_name
-            user_ok.xuan_pro_title = user.pro_title
-
-            user_ok.save()
-
-            models.Select_notok.objects.filter(notok_username=user.stu_username).delete()
-
-
-
-    return HttpResponse('ok')
 

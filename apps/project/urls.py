@@ -12,6 +12,8 @@ urlpatterns =[
     url(r'^test/$',views.select_situation,),
     url(r'^data/$',views.teacher_chakan),
     url(r'^data_not/$',views.tea_chakan),
-    url(r'^tea_chakan/$',views.chakan_select),
-    url(r'^test/$',views.select_situation,)
+    url(r'^tea_chakan/$',views.chakan_select,name="查看学生已选题"),
+    url(r'^tea_chakannot/$',views.chakan_notok,name='查看未选题情况'),
+
+
 ]

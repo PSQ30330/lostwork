@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>学生选题情况</title>
+    <title>未尚选题学生情况</title>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -15,12 +15,13 @@
 
 </head>
 <body>
- <table id="example" class="display" style="width:100%">
+<table id="not_ok" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>选题学生学号</th>
-                <th>选题学生姓名</th>
-                <th>已选题目</th>
+
+                <th>尚未选题学生学号</th>
+                <th>尚未选题学生姓名</th>
+
 
             </tr>
         </thead>
@@ -28,18 +29,16 @@
 
     </table>
 
-
- <script type="text/javascript">
+     <script type="text/javascript">
      $(document).ready(function() {
-        $('#example').DataTable({
+        $('#not_ok').DataTable({
             searching : false,
             destroy :true,
-        "ajax":"/project/data/",
+        "ajax":"/project/data_not/",
         "columns":[
-                {"data":"xuan_username"},
-                {"data":"xuan_stu_name"},
-                {"data":"xuan_pro_title"},
 
+                {"data":"notok_username"},
+                {"data":"notok_stu_name"},
 
 
             ],
@@ -51,7 +50,6 @@
 
         });
     } );
-
  </script>
 
 </body>
