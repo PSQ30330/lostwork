@@ -42,6 +42,7 @@ class StudentSelect(models.Model):
 
 
     stu_username = models.CharField(max_length=15,verbose_name="学号")
+    stu_name = models.CharField(max_length=15,null=True,verbose_name="姓名")
     stu_proid = models.CharField(max_length=15,unique=True,verbose_name="实训题目id")
     pro_title =models.CharField(max_length=40,null=True,verbose_name="实训题目")
     pro_type = models.CharField(max_length=32, choices=gender, default='校内', verbose_name='课题类型')
@@ -60,19 +61,31 @@ class StudentSelect(models.Model):
         verbose_name = "学生选题"
         verbose_name_plural = "学生选题"
 
+class Select_Over(models.Model):
+    xuan_username = models.CharField(max_length=15, verbose_name="学号")
+    xuan_stu_name = models.CharField(max_length=32,verbose_name="姓名")
+    xuan_pro_title = models.CharField(max_length=40, null=True, verbose_name="实训题目")
 
 
-# class StudentSelectNum(models.Model):
-#
-#     stu_num = models.IntegerField(null=True,verbose_name="学生人数")
-#     stu_selectnum = models.IntegerField(null=True,verbose_name="选题人数")
-#     stu_noselectnum = models.IntegerField(null=True,validators="未选人数")
-#
-#     def __str__(self):
-#         return self.stu_num,self.stu_selectnum,self.stu_noselectnum
-#
-#     class Meta:
-#         db_table = 'student_select_num'
-#         ordering = ['-c_time']
-#         verbose_name = "学生选题"
-#         verbose_name_plural = "学生选题"
+    def __str__(self):
+        return self.xuan_username
+
+    class Meta:
+        db_table = 'select_ok'
+
+        verbose_name = "已经选题"
+        verbose_name_plural = "已经选题"
+
+class Select_notok(models.Model):
+    notok_username = models.CharField(max_length=15,unique=True,verbose_name="学号")
+    notok_stu_name = models.CharField(max_length=32,verbose_name="姓名")
+    notok_pro_title = models.CharField(max_length=40, null=True, verbose_name="实训题目")
+
+    def __str__(self):
+        return self.notok_username
+
+    class Meta:
+        db_table = 'select_notok'
+
+        verbose_name = "尚未选题"
+        verbose_name_plural = "尚未选题"
