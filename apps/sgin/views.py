@@ -1,12 +1,14 @@
 # Create your views here.
+import json
 import time
 
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from sgin import forms, models
 from student.models import Student
 
-
+# 学生签到
 def student_sgin(request):
     if request.session.get('is_login', None):
 
@@ -51,3 +53,25 @@ def student_sgin(request):
 
     sgin_form = forms.StudentSginForm
     return  render(request,'sgin/student_sgin.html',locals())
+
+def chakan(request):
+    return render(request,'sgin/student_chakan.html')
+
+def student_chakan(requset):
+    users_list = []
+    username = requset.session.get('username')
+    req = models.Sgin.objects.filter(username=username).all()
+
+    for item in req:
+        user_info = {
+            "username":item.username,
+            "stu_name":item.stu_name,
+            "c_time":item.c_time,
+
+        }
+        users_list.append(user_info)
+
+    user_dic = {}
+    user_dic['data'] = users_list
+
+    return HttpResponse(json.dumps(user_dic))
