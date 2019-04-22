@@ -180,7 +180,7 @@ def select_situation(request):
 
 
 
-    return HttpResponse('ok')
+    return redirect('/teacher/index/')
 
 # 已经选题学生
 def chakan_select(request):

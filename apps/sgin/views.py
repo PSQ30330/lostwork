@@ -52,8 +52,9 @@ def student_sgin(request):
 
 
     sgin_form = forms.StudentSginForm
-    return  render(request,'sgin/student_sgin.html',locals())
+    return render(request,'sgin/student_sgin.html',locals())
 
+#学生查看签到数据
 def chakan(request):
     return render(request,'sgin/student_chakan.html')
 
@@ -75,3 +76,37 @@ def student_chakan(requset):
     user_dic['data'] = users_list
 
     return HttpResponse(json.dumps(user_dic))
+
+def teacher_input(request):
+    if request.method=="POST":
+
+        tea_chakanform =forms.StudentSginForm(request.POST)
+        if tea_chakanform.is_valid():
+            username = tea_chakanform.cleaned_data['username']
+            people = models.Chankan()
+            people.username = username
+            people.save()
+            return render(request,'sgin/teacher_chakan.html')
+
+
+    tea_chakanform = forms.StudentSginForm
+    return render(request, 'sgin/teacher_select.html', locals())
+
+
+def teacher_select(request):
+        chakan = models.Chankan.objects.filter().first()
+        user_list =[]
+        username = chakan.username
+        req = models.Sgin.objects.filter(username=username).all()
+
+        for item in req:
+            user_info = {
+                "username":item.username,
+                "stu_name":item.stu_name,
+                "c_time":item.c_time,
+            }
+            user_list.append(user_info)
+        user_dic = {}
+        user_dic['data'] = user_list
+        models.Chankan.objects.filter(username=username).delete()
+        return HttpResponse(json.dumps(user_dic))

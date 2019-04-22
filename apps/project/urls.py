@@ -9,9 +9,9 @@ urlpatterns =[
     url(r'^xuanti/$',views.student_xunti,name ="选题"),
     url(r'^chakan/$',views.chakan,name="查看选题"),
     url(r'^stu_chakan/$',views.stu_chakan,name="返回题目"),
-    url(r'^test/$',views.select_situation,),
-    url(r'^data/$',views.teacher_chakan),
-    url(r'^data_not/$',views.tea_chakan),
+    url(r'^test/$',views.select_situation,name='刷新选题情况'),
+    url(r'^data/$',views.teacher_chakan,name='查看已经选题学生'),
+    url(r'^data_not/$',views.tea_chakan,name='查看未选题学生'),
     url(r'^tea_chakan/$',views.chakan_select,name="查看学生已选题"),
     url(r'^tea_chakannot/$',views.chakan_notok,name='查看未选题情况'),
 
