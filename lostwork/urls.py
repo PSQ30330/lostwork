@@ -13,7 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
@@ -23,5 +25,5 @@ urlpatterns = [
     url(r'^project/', include('project.urls', namespace='project')),
     url(r'^sgin/',include('sgin.urls',namespace='sgin')),
     url(r'^captcha', include('captcha.urls')),
-
+    url(r'^upload/',include('upload.urls'))
 ]
