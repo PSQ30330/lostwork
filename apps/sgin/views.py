@@ -86,7 +86,7 @@ def teacher_input(request):
             people = models.Chankan()
             people.username = username
             people.save()
-            return render(request,'sgin/teacher_chakan.html')
+            return render(request, 'sgin/teacher_chakan.html')
 
 
     tea_chakanform = forms.StudentSginForm
