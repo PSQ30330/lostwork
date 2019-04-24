@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^sgin/',include('sgin.urls',namespace='sgin')),
     url(r'^captcha', include('captcha.urls')),
     url(r'^upload/',include('upload.urls')),
+    url(r'^weekly/',include('weekly.urls')),
 
 
 ]
