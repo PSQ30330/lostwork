@@ -1,11 +1,16 @@
 import json
+import os
 import time
 
 from django import forms
+from django.core.files import File
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.decorators.http import require_GET
+
+
 from sgin.models import Chankan
 from student.models import Student
 from upload.models import Files
@@ -76,10 +81,23 @@ def teacher_select(request):
         return HttpResponse(json.dumps(user_dic))
 
 
+# 文件下载
+SAVED_FILES_DIR = r'./media/files/'
 
-def file_down(request):
-    file=open('/home/amarsoft/download/example.tar.gz','rb')
-    response =FileResponse(file)
-    response['Content-Type']='application/octet-stream'
-    response['Content-Disposition']='attachment;filename="example.tar.gz"'
+def render_home_template(request):
+    files = os.listdir(SAVED_FILES_DIR)
+    return render(request, 'upload/home.html', {'files': files})
+
+@require_GET
+def download(request, filename):
+    file_pathname = os.path.join(SAVED_FILES_DIR, filename)
+
+    with open(file_pathname, 'rb') as f:
+        file = File(f)
+
+        response = HttpResponse(file.chunks(),
+                                content_type='APPLICATION/OCTET-STREAM')
+        response['Content-Disposition'] = 'attachment; filename=' + filename
+        response['Content-Length'] = os.path.getsize(file_pathname)
+
     return response

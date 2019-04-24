@@ -25,5 +25,7 @@ urlpatterns = [
     url(r'^project/', include('project.urls', namespace='project')),
     url(r'^sgin/',include('sgin.urls',namespace='sgin')),
     url(r'^captcha', include('captcha.urls')),
-    url(r'^upload/',include('upload.urls'))
+    url(r'^upload/',include('upload.urls')),
+
+
 ]

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文件下载</title>
+</head>
+<body>
+    <ul>
+        {% for file in files %}
+            <li><a href="{% url 'download' file %}">{{ file }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

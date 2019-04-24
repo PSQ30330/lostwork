@@ -81,7 +81,7 @@ def student_xunti(requset):
             pro_id = stu_xunti_form.cleaned_data['stu_proid']
             id = models.StudentSelect.objects.filter().count()
             if id > 0:
-                message = "已经选过实训; 题目，无需再添加"
+                message = "已经选过实训题目，无需再添加"
                 return render(requset, 'project/student_xuanti.html', locals())
             else:
                 neirong = models.TeacherProject.objects.filter(pro_id=pro_id).all().first()
