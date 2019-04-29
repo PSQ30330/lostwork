@@ -8,6 +8,8 @@ from lostwork import settings
 from student import forms
 from student import models
 
+def index_view(requset):
+    return render(requset, 'index.html')
 
 def index(request):
 

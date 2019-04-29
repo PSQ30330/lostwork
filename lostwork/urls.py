@@ -13,10 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
 from django.conf.urls import url, include
-from django.conf.urls.static import static
 from django.contrib import admin
+
+from student.views import index_view
 
 urlpatterns = [
     url('admin/', admin.site.urls),
@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^captcha', include('captcha.urls')),
     url(r'^upload/',include('upload.urls')),
     url(r'^weekly/',include('weekly.urls')),
+    url('^$',index_view)
+
 
 
 ]

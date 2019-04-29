@@ -10,4 +10,5 @@ urlpatterns =[
 
     url(r'^confirm/$', views.user_confirm),
 
+
 ]
