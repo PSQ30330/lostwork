@@ -33,7 +33,7 @@ def student_sgin(request):
                     new_user.beizhu = beizhu
                     new_user.save()
 
-                    return redirect('/student/index/')
+                    return render(request, 'sgin/add_successful.html/')
 
                 elif beizhu != duibi.beizhu:
 
@@ -45,11 +45,10 @@ def student_sgin(request):
                     new_user.beizhu = beizhu
                     new_user.save()
 
-                    return redirect('/student/index/')
+                    return render(request,'sgin/add_successful.html/')
                 else:
                     message = "今日已签到，无需再签到"
                     return render(request, 'sgin/student_sgin.html', locals())
-
 
     sgin_form = forms.StudentSginForm
     return render(request,'sgin/student_sgin.html',locals())

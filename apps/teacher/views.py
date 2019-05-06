@@ -33,7 +33,7 @@ def login(request):
                     return render(request, 'teacher/login.html', locals())
                 if user.password == hash_code(password):
                     request.session['is_login'] = True
-
+                    request.session['username'] = user.username
                     request.session['tea_name'] = user.tea_name
                     return redirect('/teacher/index/')
                 else:
@@ -123,7 +123,7 @@ def register(request):
                 code = make_confirm_string(new_user)
                 send_email(emali, code)
 
-                return redirect('/teacher/login/')  # 自动跳转到登录页面
+                return render(request,'teacher/register_successful.html')
     register_form = forms.RegisterForm()
     return render(request, 'teacher/register.html', locals())
 
@@ -134,11 +134,8 @@ def logout(request):
         # 如果本来就未登录，也就没有登出一说
         return redirect("/teacher/index/")
     request.session.flush()
-    # 或者使用下面的方法
-    # del request.session['is_login']
-
-    # del request.session['user_name']
     return redirect("/teacher/index/")
+
 def user_confirm(request):
     code = request.GET.get('code', None)
     message = ''

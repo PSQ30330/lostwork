@@ -22,15 +22,17 @@
               </div>
               <div class="form-group">
                   {{ weekly_form.plan_finish.label_tag }}
-                  {{ weekly_form.plan_finish }}
+                  <textarea class="form-control" rows="3" name="plan_finish" required id="id_plan_finish" maxlength="5000"></textarea>
+
               </div>
               <div class="form-group">
-                  {{ weekly_form.finished.label_tag }}
-                  {{ weekly_form.finished}}
+                  {{ weekly_form.finished.label_tag }}<textarea class="form-control" rows="3" name="finished" required id="id_finished" maxlength="5000"></textarea>
+
               </div>
                 <div class="form-group">
                   {{ weekly_form.content.label_tag }}
-                  {{ weekly_form.content}}
+                    <textarea class="form-control" rows="3" name="content" required id="content" maxlength="5000"></textarea>
+
               </div>
                 <div class="form-group">
                   {{ weekly_form.c_time.label_tag }}

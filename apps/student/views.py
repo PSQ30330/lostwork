@@ -126,7 +126,7 @@ def register(request):
                 code = make_confirm_string(new_user)
                 send_email(emali, code)
 
-                return redirect('/student/login/')  # 自动跳转到登录页面
+                return render(request,'student/register_successful.html')
     register_form = forms.RegisterForm()
     return render(request, 'student/register.html', locals())
 
@@ -140,7 +140,9 @@ def logout(request):
 
 
     return redirect("/student/index/")
+
 def user_confirm(request):
+
     code = request.GET.get('code', None)
     message = ''
     try:

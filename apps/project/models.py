@@ -13,6 +13,7 @@ class TeacherProject(models.Model):
 
     pro_id = models.AutoField(max_length=11,primary_key=True,verbose_name="编号")
     pro_title = models.CharField(max_length=40,verbose_name="标题")
+    pro_username = models.CharField(max_length=15, null=True, verbose_name='老师工号')
     pro_type = models.CharField(max_length=32,choices=gender,default='校内',verbose_name='课题类型')
     pro_teacher = models.CharField(max_length=15,verbose_name='指导老师')
     pro_content = models.TextField(max_length=1000,verbose_name='课题内容')
@@ -31,6 +32,9 @@ class TeacherProject(models.Model):
         ordering = ['-c_time']
         verbose_name = "实训题目"
         verbose_name_plural = "实训题目"
+
+
+
 
 class StudentSelect(models.Model):
 
@@ -73,8 +77,8 @@ class Select_Over(models.Model):
     class Meta:
         db_table = 'select_ok'
 
-        verbose_name = "已经选题"
-        verbose_name_plural = "已经选题"
+        verbose_name = "已经选题学生"
+        verbose_name_plural = "已经选题学生"
 
 class Select_notok(models.Model):
     notok_username = models.CharField(max_length=15,unique=True,verbose_name="学号")
@@ -87,5 +91,20 @@ class Select_notok(models.Model):
     class Meta:
         db_table = 'select_notok'
 
-        verbose_name = "尚未选题"
-        verbose_name_plural = "尚未选题"
+        verbose_name = "尚未选题学生"
+        verbose_name_plural = "尚未选题学生"
+
+class KaoHe(models.Model):
+    stu_name = models.CharField(max_length=15,verbose_name='学生学号')
+    kaoqin = models.IntegerField(verbose_name='考勤')
+    baogao = models.IntegerField(verbose_name='实训报告')
+    shixian = models.IntegerField(verbose_name='系统实现')
+    count = models.IntegerField(null=True,verbose_name='总成绩')
+
+    def __str__(self):
+        return self.stu_name
+
+    class Meta:
+        db_table = 'kaohe'
+        verbose_name = '实训考核'
+        verbose_name_plural = '实训考核'

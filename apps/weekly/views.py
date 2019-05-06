@@ -36,7 +36,7 @@ def add_weekly(request):
                 new_pro.c_time = c_time
                 new_pro.save()
 
-                return redirect('/student/index/')
+                return render(request,'weekly/add_successful.html/')
 
     weekly_form = forms.StudentWeeklyForm()
 

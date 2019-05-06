@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>{% block title %}base{% endblock %}</title>
-     <style>
-          body { height: 100%; background: #fff url('/static/image/bg-01.jpg') 50% 50% no-repeat; background-size: cover;}
-      </style>
+
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -20,6 +18,9 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     {% block css %}{% endblock %}
+     <style>
+          body { height: 100%; background: #fff url('/static/image/bg-01.jpg') 50% 50% no-repeat; background-size: cover;}
+      </style>
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -48,6 +49,7 @@
                   <li class="active"><a href="/weekly/teacher_input/">课题进展</a></li>
                   <li class="active"><a href="/upload/tea_select/">查询学生文件上传</a></li>
                   <li class="active"><a href="/upload/home/">下载文件</a></li>
+                  <li class="active"><a href="/project/count/">实训考核</a></li>
               {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">

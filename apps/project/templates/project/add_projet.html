@@ -14,30 +14,36 @@
               {% endif %}
                 {% csrf_token %}
               <h2 class="text-center">请录入课题</h2>
+
               <div class="form-group">
                   {{ add_form.pro_title.label_tag}}
                   {{ add_form.pro_title }}
               </div>
+
               <div class="form-group">
                   {{ add_form.pro_type.label_tag }}
                   {{ add_form.pro_type}}
               </div>
-              <div class="form-group">
-                  {{ add_form.pro_teacher.label_tag }}
-                  {{ add_form.pro_teacher}}
-              </div>
-              <div class="form-group">
+
+              <div class="form-group" >
+
                   {{ add_form.pro_content.label_tag }}
-                  {{ add_form.pro_content}}
+                    <textarea class="form-control" rows="3" name="pro_content" required id="id_pro_content" maxlength="1000"></textarea>
+{#                <input type="text" name="pro_content" class="form-control "#}
+{#                   #}
+{#                       required id="id_pro_content" maxlength="1000" />#}
               </div>
+
               <div class="form-group">
                   {{ add_form.pro_count.label_tag }}
                   {{ add_form.pro_count}}
               </div>
+
               <div class="form-group">
                   {{ add_form.captcha.label_tag }}
                   {{ add_form.captcha}}
               </div>
+
               <button type="reset" class="btn btn-default pull-left">重置</button>
               <button type="submit" class="btn btn-primary pull-right">提交</button>
           </form>

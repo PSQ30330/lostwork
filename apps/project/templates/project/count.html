@@ -1,0 +1,43 @@
+{% extends 'base_t.html' %}
+
+{% block title %}实训考核{% endblock %}
+{
+{% block content %}
+
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+
+            <form class='form-add' action="/project/count/" method="post">
+
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+                {% csrf_token %}
+                <h2 class="text-center">请录入成绩</h2>
+                <div class="form-group">
+                    {{ kaohe_form.stu_name.label_tag }}
+                    {{ kaohe_form.stu_name }}
+                </div>
+                <div class="form-group">
+                    {{ kaohe_form.kaoqin.label_tag }}
+                    {{ kaohe_form.kaoqin }}
+                </div>
+                <div class="form-group">
+                    {{ kaohe_form.baogao.label_tag }}
+                    {{ kaohe_form.baogao }}
+                </div>
+                <div class="form-group">
+                    {{ kaohe_form.shixian.label_tag }}
+                    {{ kaohe_form.shixian }}
+                </div>
+                <div class="form-group">
+                    {{ kaohe_form.captcha.label_tag }}
+                    {{ kaohe_form.captcha }}
+                </div>
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">提交</button>
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}
+

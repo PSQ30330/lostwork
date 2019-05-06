@@ -14,6 +14,10 @@ urlpatterns =[
     url(r'^data_not/$',views.tea_chakan,name='查看未选题学生'),
     url(r'^tea_chakan/$',views.chakan_select,name="查看学生已选题"),
     url(r'^tea_chakannot/$',views.chakan_notok,name='查看未选题情况'),
+    url(r'^count/$',views.kaohe),
+    url(r'^chakancount/$',views.chakan_count),
+    url(r'^chacount/$',views.cha_count),
+    # url(r'^article/(?P<article_id>[0-9]+)$', views.project_page(),name='project_page'),
 
 
 ]

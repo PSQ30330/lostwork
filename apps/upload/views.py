@@ -37,7 +37,7 @@ def register(request):
             user.date = time_now
             user.headfiles = headfiles
             user.save()
-            return HttpResponse('文件上传成功!')
+            return render(request,'upload/upload_successful.html')
     else:
         uf = UserForm()
     return render(request, 'upload/register.html',locals())
