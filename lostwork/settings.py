@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +59,7 @@ EMAIL_HOST_USER = 'panshaoqian1993@163.com'
 #在邮箱中设置的客户端授权密码
 EMAIL_HOST_PASSWORD = 'zyy911'
 #收件人看到的发件人
-EMAIL_FROM = '实训管理系统<panshaoqian1993@163.com>'
+EMAIL_FROM = '实训管理系统激活邮件'
 CONFIRM_DAYS = 7
 
 MIDDLEWARE = [

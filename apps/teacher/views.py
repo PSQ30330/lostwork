@@ -98,6 +98,15 @@ def register(request):
             if password1 != password2:  # 判断两次密码是否相同
                 message = "两次输入的密码不同！"
                 return render(request, 'teacher/register.html', locals())
+
+            elif len(username) != 8 or username.isdigit() == False:
+                message = "请正确输入学号，必须为8个字符且为纯数字"
+                return render(request, 'teacher/register.html', locals())
+
+            elif len(password1) < 6 or password1.isalnum() == False:
+                message = "请正确设置密码，6位以上且由字母或数字组成"
+                return render(request, 'teacher/register.html', locals())
+
             else:
                 same_name_user = models.Teacher.objects.filter(username=username)
                 if same_name_user:  # 用户名唯一

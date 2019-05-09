@@ -17,6 +17,8 @@ urlpatterns =[
     url(r'^count/$',views.kaohe),
     url(r'^chakancount/$',views.chakan_count),
     url(r'^chacount/$',views.cha_count),
+    url(r'^(?P<pk>\d+)/$',views.project_page,name = 'page'),
+    url(r'^shixun/',views.shuxun),
     # url(r'^article/(?P<article_id>[0-9]+)$', views.project_page(),name='project_page'),
 
 

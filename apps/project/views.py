@@ -279,6 +279,37 @@ def cha_count(requset):
     user_dic['data'] = chengji
     return HttpResponse(json.dumps(user_dic))
 
-# def project_page(request,pro_id):
-#     project = models.TeacherProject.objects.get(pro_id = pro_id)
-#     return render(request,'project_page.html',{'project':project})
+# def get_id(request):
+#     projects = models.TeacherProject.objects.all()
+#     u
+def shuxun(requset):
+
+    if requset.method == 'GET':
+        id = requset.GET.get("id");
+
+    return render(requset, 'project/xianshi.html',locals())
+
+
+def project_page(request,pk):
+    projects = models.TeacherProject.objects.filter(pk = pk).all()
+    users_list = []
+    for item in projects:
+        if item.has_confirmed == True:
+            user_info = {
+                "pro_id": item.pro_id,
+                "pro_title": item.pro_title,
+                "pro_type": item.pro_type,
+                "pro_teacher": item.pro_teacher,
+                "pro_content": item.pro_content,
+                "pro_count": item.pro_count,
+                "bei_zhu": item.bei_zhu,
+                "fa_za": item.fa_za,
+                "fei_gong": item.fei_gong,
+
+            }
+            users_list.append(user_info)
+    user_dic = {}
+
+    user_dic['data'] = users_list
+    return HttpResponse(json.dumps(user_dic))
+
