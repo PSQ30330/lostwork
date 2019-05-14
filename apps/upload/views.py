@@ -86,7 +86,7 @@ SAVED_FILES_DIR = r'./media/files/'
 
 def render_home_template(request):
     files = os.listdir(SAVED_FILES_DIR)
-    return render(request, 'upload/home.html', {'files': files})
+    return render(request, 'upload/home.html', locals())
 
 @require_GET
 def download(request, filename):

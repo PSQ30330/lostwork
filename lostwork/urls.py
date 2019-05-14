@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^captcha', include('captcha.urls')),
     url(r'^upload/',include('upload.urls')),
     url(r'^weekly/',include('weekly.urls')),
+    url(r'^comment/',include('comment.urls',namespace='comment')),
     url('^$',index_view)
 
 

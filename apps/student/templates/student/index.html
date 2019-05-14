@@ -2,7 +2,7 @@
 {% block title %}主页{% endblock %}
 {% block content %}
     {% if request.session.is_login %}
-    <h1>你好,{{ request.session.stu_name }}！欢迎回来！</h1>
+    <h1>你好,{{ request.session.name }}！欢迎回来！</h1>
     {% else %}
     <h1>这里是学生首页，请登录</h1>
     {% endif %}

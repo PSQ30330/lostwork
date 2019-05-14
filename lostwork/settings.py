@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'upload',
     'captcha',
     'weekly',
+    'comment',
 
 
 

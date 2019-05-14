@@ -26,10 +26,8 @@
     <thead>
     <tr>
         <th>编号</th>
-        <th>标题</th>
+        <th>题目</th>
         <th>指导老师</th>
-        <th>课题内容</th>
-        <th>学生选题人数</th>
         <th>管理员审核意见</th>
         <th>课题难易程度</th>
         <th>学生分工</th>
@@ -53,8 +51,6 @@
                 {"data": "pro_id",},
                 {"data": "pro_title"},
                 {"data": "pro_teacher"},
-                {"data": "pro_content"},
-                {"data": "pro_count"},
                 {"data": "bei_zhu"},
                 {"data": "fa_za"},
                 {"data": "fei_gong"},
@@ -64,7 +60,7 @@
             columnDefs: [{
                 //   指定第最后一列
 
-                targets: 8,
+                targets: 6,
                 render: function (data, type, row, meta) {
                     {#return '<a type="button"   onclick="select("' + row.pro_id + '","' + row.pro_title + '")" >查看</a>';#}
                     return '<a type="button" href="/project/shixun?id='+row.pro_id+'">查看</a>';
@@ -92,17 +88,7 @@
 
     });
 
-    function del(id, name) {
-        $.ajax({
-            url: "/project/shixun/",
-            //在后台接受id这个参数
-            type: 'get',
-            data: {
-                pro_id: id
-            },
 
-        })
-    }
 
 </script>
 

@@ -43,7 +43,6 @@
             <li class="active"><a href="/student/index/">主页</a></li>
               {% if request.session.is_login %}
               <li class="active"><a href="/project/info/">实训选题</a></li>
-                  <li class="active"><a href="/project/xuanti/">学生选题</a></li>
                   <li class="active"><a href="/project/chakan/">查看已选题目</a></li>
                   <li class="active"><a href="/sgin/sgin/">签到</a></li>
                   <li class="active"><a href="/sgin/chakan/">签到详情</a></li>
@@ -56,7 +55,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
-              <li><a href="#">当前在线：{{ request.session.stu_name }}</a></li>
+              <li><a href="#">当前在线：{{ request.session.name }}</a></li>
               <li><a href="/student/logout/">注销</a></li>
               {% else %}
             <li><a href="/student/login/">登录</a></li>

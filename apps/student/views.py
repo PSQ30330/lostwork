@@ -34,7 +34,7 @@ def login(request):
                 if user.password == hash_code(password):
                     request.session['is_login'] = True
                     request.session['username'] =user.username
-                    request.session['stu_name'] = user.stu_name
+                    request.session['name'] = user.stu_name
                     return redirect('/student/index/')
                 else:
                     message = "密码不正确！"
